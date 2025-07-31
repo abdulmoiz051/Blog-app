@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block self %}
+<br />
+<h2>Welcome to my mini area</h2>
+<br />
+<br />
+<a href="{% url "blog" %}" class="btn btn-secondary">Add blog</a>
+<div class="container row gap-4">
+  {% for otr in all_blog_list %}
+  <div class="card" style="width: 18rem">
+    {% if otr.Image %}
+    <img src="{{otr.Image.url}}" class="card-img-top" alt="..." />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">User = {{otr.User}}</h5>
+      <p class="card-text">
+        {{otr.Text}}
+      </p>
+      {% if otr.User == user %}
+      <a href="{% url "update" otr.id%}" class="btn btn-primary mx-2">Update</a>
+      <a href="{% url "delete" otr.id%}" class="btn btn-danger">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div> 
+
+{% endblock self %}
